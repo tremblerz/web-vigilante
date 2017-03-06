@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from dashboard import views as dashboard_view
+from twitter_board import views as twitter_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', dashboard_view.home),
+    url(r'^twitter/', twitter_view.home),
 ]
