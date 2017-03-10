@@ -1,6 +1,7 @@
+
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler, Stream
-import twitter_api_cred
+from application.creds import twitter_api
 import json
 import psycopg2
 from textblob import TextBlob
@@ -10,10 +11,10 @@ try:
 except Exception as e:
     print("Error: " + e.message)
 
-access_token = twitter_api_cred.access_token
-access_token_secret = twitter_api_cred.access_token_secret
-consumer_key = twitter_api_cred.consumer_key
-consumer_secret = twitter_api_cred.consumer_secret
+access_token = twitter_api['access_token']
+access_token_secret = twitter_api['access_token_secret']
+consumer_key = twitter_api['consumer_key']
+consumer_secret = twitter_api['consumer_secret']
 
 def analyze(text):
     sentiment = TextBlob(text)
