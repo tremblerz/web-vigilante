@@ -1,0 +1,6 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def home(request):
+    context = {'app': 'quora'}
+    return render(request, 'apps/quora.html', {'context': context})
