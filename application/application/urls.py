@@ -17,9 +17,19 @@ from django.conf.urls import url
 from django.contrib import admin
 from dashboard import views as dashboard_view
 from twitter_board import views as twitter_view
+from fb import views as fb_view
+from quora import views as quora_view
+from topic import views as topic_view
+from darkweb import views as darkweb_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashboard_view.home),
     url(r'^twitter/', twitter_view.home),
+    url(r'^fb/', fb_view.home),
+    url(r'^quora/', quora_view.home),
+    url(r'^topic/', topic_view.home),
+    url(r'^darkweb/', darkweb_view.home),
+    url(r'^profile/', dashboard_view.profile),
+    url(r'^contributors/', dashboard_view.contrib),
 ]
