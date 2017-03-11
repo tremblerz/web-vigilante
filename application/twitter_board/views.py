@@ -3,4 +3,5 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return HttpResponse("twitter_home")
+    context = {'app': 'twitter'}
+    return render(request, 'apps/twitter.html', {'context': context})

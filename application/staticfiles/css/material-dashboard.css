@@ -5063,3 +5063,6 @@ footer .btn {
     margin-right: -20px;
   }
 }
+.navbar.navbar-default.navbar-absolute.nav-header{
+  background: rgba(220, 220, 220, 0.4);
+}
