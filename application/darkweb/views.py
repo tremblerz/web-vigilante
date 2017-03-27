@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 def home(request):
     context = {'app': 'darkweb'}
-    return render(request, "apps/darkweb.html", {'context': context})
+    return render(request, "apps/darkweb/darkweb.html", {'context': context})

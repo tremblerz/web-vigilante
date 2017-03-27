@@ -4,12 +4,12 @@ from django.http import HttpResponse
 
 def home(request):
     context = {'app': 'dashboard'}
-    return render(request, 'apps/dashboard.html', {'context': context})
+    return render(request, 'apps/dashboard/dashboard.html', {'context': context})
 
 def profile(request):
     context = {'app': 'profile'}
-    return render(request, 'apps/profile.html', {'context': context})
+    return render(request, 'apps/dashboard/profile.html', {'context': context})
 
 def contrib(request):
     context = {'app': 'contrib'}
-    return render(request, 'apps/contrib.html', {'context': context})
+    return render(request, 'apps/dashboard/contrib.html', {'context': context})

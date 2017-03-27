@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', dashboard_view.home),
     url(r'^twitter/', twitter_view.home),
+    url(r'^get_tweet', twitter_view.get_tweet),
+    url(r'^get_polarity', twitter_view.get_realtime_polarity),
     url(r'^fb/', fb_view.home),
     url(r'^quora/', quora_view.home),
     url(r'^topic/', topic_view.home),

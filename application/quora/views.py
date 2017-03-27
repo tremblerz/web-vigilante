@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 def home(request):
     context = {'app': 'quora'}
-    return render(request, 'apps/quora.html', {'context': context})
+    return render(request, 'apps/quora/quora.html', {'context': context})

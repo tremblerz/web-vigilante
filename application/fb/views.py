@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 def home(request):
     context = {'app': 'fb'}
-    return render(request, 'apps/fb.html', {'context': context})
+    return render(request, 'apps/fb/fb.html', {'context': context})

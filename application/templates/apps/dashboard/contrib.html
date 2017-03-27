@@ -1,0 +1,86 @@
+{% extends "../../base/base.html" %}
+{% load static %}
+
+{% block content %}
+    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="green">
+                                    
+                                        <img class="img-responsive img-rounded" src="{% static 'img/kamal_sir.jpg' %}" alt="Prof. Kamalakar Karlapalem">
+                                    
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">Kamalakar Karlapalem</h4>
+                                    <p class="category">
+                                        <span class="text-success">
+                                            <i class="material-icons">assignment_ind</i>
+                                            &nbsp;Main Mentor for the project
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <span class="text-success">
+                                            Data Mining Expert, Academic Dean, IIIT Sri City
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="red">
+                                    <!--<div class="">-->
+                                        <img class="img-responsive img-rounded" src="{% static 'img/amitava_sir.jpg' %}" alt="Dr. Amitava Das">
+                                    
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">Amitava Das</h4>
+                                    <p class="category">
+                                        <span class="text-danger">
+                                            <i class="material-icons">person</i>
+                                            &nbsp;Project Advisor and NLP guide
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <span class="text-danger">
+                                            NLP Expert, Assistant Professor, IIIT Sri City
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header card-chart" data-background-color="blue">
+                                    <div class="">
+                                        <img class="img-responsive img-rounded" src="{% static 'img/me.jpg' %}" alt="Abhishek Singh">
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <h4 class="title">Abhishek Singh</h4>
+                                    <p class="category">
+                                        <span class="text-info">
+                                            <i class="material-icons">adb</i>
+                                            Project Developer
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="stats">
+                                        <span class="text-info">
+                                            Junior Under-Graduate, IIIT Sri City
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
