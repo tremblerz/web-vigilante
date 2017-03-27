@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from .creds import database_details
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'application.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': database_details['db_name'],
+        'USER': database_details['db_user'],
+        'PASSWORD': database_details['db_password'],
+        'HOST': database_details['db_host'],
+        'PORT': '',
     }
 }
 

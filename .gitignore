@@ -88,3 +88,6 @@ web-vigilante-env/
 
 # Rope project settings
 .ropeproject
+
+# Credentials
+creds.py

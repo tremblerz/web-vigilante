@@ -1,0 +1,171 @@
+{% extends "../../base/base.html" %}
+{% load static %}
+
+{% block headers %}
+    <link href="{% static 'css/twitter.css' %}" rel="stylesheet"/>
+
+    <script src="//www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="//www.amcharts.com/lib/3/serial.js"></script>
+    <script src="//www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src='{% static "js/twitter_polarity.js" %}'></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">            
+        <div class="col-lg-12 col-md-6 col-sm-6">
+            <div class="card">
+                <div id="realtime_polarity"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% include "apps/twitter/tweets_realtime.html" %}
+    </div>
+
+{% endblock %}
+
+{% block footers %}
+<script type="text/javascript">
+    //jQuery(document).ready(function($) {
+        run_graph();
+        var index = {
+            'pos': 0,
+            'neg': 0
+        };
+        var TWEET_DISPLAY_TIME = 5000;
+        var positive_tweets_id = setInterval(function(){
+                tweets_realtime("pos");
+            }, TWEET_DISPLAY_TIME);
+        var negative_tweets_id = setInterval(function(){
+                tweets_realtime("neg");
+            }, TWEET_DISPLAY_TIME);
+    //});
+
+    function tweets_realtime(sentiment) {
+        total_tweets = get_total_tweets(sentiment);
+        console.log(total_tweets);
+        if (total_tweets >= 5)
+            remove_bottom_tweet(sentiment);
+        get_new_tweet(sentiment, index[sentiment]);
+        index[sentiment] += 1;
+    }
+
+    function get_new_tweet(sentiment, tweet_index) {
+        $.ajax({
+            url: '/get_tweet/',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    sentiment: sentiment,
+                    index: tweet_index,
+                },
+        })
+        .done(function(tweet_data) {
+            console.log(tweet_data);
+            return generate_html(sentiment, tweet_data);
+        })
+        .fail(function() {
+            console.log("Tweets over for " + sentiment +" sentiment");
+            //console.log(index[sentiment]);
+            index[sentiment] = 0;
+        })
+        .always(function() {
+            //console.log("complete");
+        });
+        
+    }
+
+    function get_total_tweets(sentiment) {
+        return $('table.' + sentiment + ' tr').length
+    }
+
+    function remove_bottom_tweet(sentiment) {
+        $('table.' + sentiment + ' tbody tr').last().fadeOut(1000, function(){
+            $('table.' + sentiment + ' tbody tr').last().remove();
+        });
+    }
+
+    function remove_tweet(id) {
+        $(id).remove();
+    }
+
+    function generate_html(sentiment, tweet_data) {
+        row_html = '\
+            <tr id=' + tweet_data.tweet_id + '>\
+                <td>\
+                    ' + tweet_data.polarity +'\
+                </td>\
+                <td>' + tweet_data.tweet + '</td>\
+                <td class="td-actions text-right">\
+                    <button type="button" rel="tooltip" title="Approve Annotation" class="btn btn-primary btn-simple btn-xs">\
+                        <i class="material-icons">done</i>\
+                    </button>\
+                    <button type="button" rel="tooltip" title="Wrong Classification" class="btn btn-danger btn-simple btn-xs">\
+                        <i class="material-icons">close</i>\
+                    </button>\
+                </td>\
+            </tr>';
+        return prepend_tweet(sentiment, row_html);
+    }
+
+    function prepend_tweet(sentiment, row_html) {
+        //$('table.' + sentiment + ' tbody')
+        $('table.' + sentiment + ' tbody').prepend(row_html);
+        return true;
+    }
+
+    function run_graph(){
+        var timeout;
+        var tweet_index = 0;
+        setInterval( function() {
+            // normally you would load new data points via AJAX
+            // for the sake of this demo we will just generate random values
+
+            // remove one data point from beginning
+            chart.dataProvider.shift();
+
+            $.ajax({
+                url: '/get_polarity/',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        index: tweet_index,
+                    },
+            })
+            .done(function(polarity) {
+                //console.log(tweet_index);
+                console.log(polarity);
+                return add_new_polarity(polarity.polarity);
+            })
+            .fail(function() {
+                console.log("Tweets over");
+                tweet_index = 0;
+            })
+            .always(function() {
+                //console.log("complete");
+            });
+
+              if (timeout)
+                clearTimeout(timeout);
+              timeout = setTimeout(function () {
+                chart.validateData();
+              });
+            }, 100 );
+
+        function add_new_polarity(polarity) {
+            var newDate = new Date( chart.dataProvider[ chart.dataProvider.length - 1 ].date );
+            // each time we add one minute
+            newDate.setMinutes( newDate.getMinutes() + 1 );
+            chart.dataProvider.push({
+                date: newDate,
+                polarity: polarity
+            });
+            tweet_index += 1;
+        }
+    }
+</script>
+{% endblock %}
