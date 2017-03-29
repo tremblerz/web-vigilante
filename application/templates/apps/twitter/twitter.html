@@ -12,6 +12,37 @@
 
 {% block content %}
 
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="card-header" data-background-color="blue">
+                    <h4 class="title">Highly Retweeted</h4>
+                    <p class="category">Top 5 highly re-tweeted tweets</p>
+                </div>
+                <div>
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                                <th>Tweet</th>
+                                <th>Re-tweets</th>
+                                <th>Likes</th>
+                                <th>Time</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id='1'></td>
+                                    <td id='2'></td>
+                                    <td id='3'></td>
+                                    <td id='4'></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">            
         <div class="col-lg-12 col-md-6 col-sm-6">
             <div class="card">
@@ -27,6 +58,7 @@
 {% endblock %}
 
 {% block footers %}
+<script type="text/javascript" src='{% static "js/retweets.js" %}'></script>
 <script type="text/javascript">
     //jQuery(document).ready(function($) {
         run_graph();
