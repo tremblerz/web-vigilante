@@ -1,0 +1,10 @@
+Django==1.10.6
+-e git+https://github.com/jrief/django-angular@220bf6390e9c83dbb0ad8a3247b9cfb8fda0f6ec#egg=django_angular-origin/master
+nltk==3.2.2
+oauthlib==2.0.1
+psycopg2==2.7
+requests==2.13.0
+requests-oauthlib==0.8.0
+six==1.10.0
+textblob==0.12.0
+tweepy==3.5.0
